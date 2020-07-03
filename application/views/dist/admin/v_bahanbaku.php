@@ -14,7 +14,7 @@
   <!-- Template CSS -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/style.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/components.css">
-  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/modules/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/modules/bootstrap-daterangepicker/js/daterangepicker.css">
 <!-- Start GA -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
 <script>
@@ -50,7 +50,7 @@ $this->load->view('dist/_partials/navbody');
                   </div>     
                   <div class="form-group">
                     <label>Tanggal Masuk</label>
-                      <input type="text" class="form-control" id="datepicker" placeholder="Masukan Tanggal Masuk" name="tgl_masuk" required>
+                      <input type="text" class="form-control datepicker" id="datepicker" placeholder="Masukan Tanggal Masuk" name="tgl_masuk" required>
                       <i class="form-control-feedback"></i><span class="text-warning" ></span>
                   </div> 
 
@@ -128,7 +128,7 @@ $this->load->view('dist/_partials/navbody');
 <script src="<?php echo base_url('assets/js/page/modules-datatables.js') ?>"></script> 
 
  <!-- General JS Scripts -->
-  <script src="<?php echo base_url(); ?>assets/modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/modules/bootstrap-daterangepicker/js/daterangepicker.js"></script>
   <script src="<?php echo base_url(); ?>assets/modules/popper.js"></script>
   <script src="<?php echo base_url(); ?>assets/modules/tooltip.js"></script>
   <script src="<?php echo base_url(); ?>assets/modules/bootstrap/js/bootstrap.min.js"></script>
@@ -148,7 +148,13 @@ $this->load->view('dist/_partials/navbody');
   <!-- Template JS File -->
   <script src="<?php echo base_url(); ?>assets/js/scripts.js"></script>
   <script src="<?php echo base_url(); ?>assets/js/custom.js"></script>
-
+  <script type="text/javascript">
+  $(function(){
+  $(".datepicker").datepicker({
+    format: 'yy:MM:dd',
+  });
+  });
+</script>
   <script type="text/javascript">
         var table;
         var tablemodal;
