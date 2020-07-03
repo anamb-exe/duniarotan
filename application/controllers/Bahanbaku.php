@@ -37,7 +37,7 @@ public function setView(){
                         "id"      => $r->id,
                         "kode"      => $r->kode,
                         "tgl_masuk"      => $r->tgl_masuk,
-                        "jumlah"      => add($r->jumlah),
+                        "jumlah"      => $r->jumlah,
                         "action"         => tombol($r->id)
             );
 

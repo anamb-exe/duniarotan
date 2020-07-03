@@ -1,6 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>Bahan Baku</title>
+
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/modules/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/modules/fontawesome/css/all.min.css">
+
+  <!-- CSS Libraries -->
+
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/style.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/components.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/modules/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
+<!-- Start GA -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-94034622-3');
+</script>
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$this->load->view('dist/_partials/header');
+$this->load->view('dist/_partials/navbody');
 ?>
 <!-- Datatables4 -->
 <link rel="stylesheet" href="<?php echo base_url('assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') ?>">
@@ -24,7 +50,7 @@ $this->load->view('dist/_partials/header');
                   </div>     
                   <div class="form-group">
                     <label>Tanggal Masuk</label>
-                      <input type="text" class="form-control" placeholder="Masukan Tanggal Masuk" name="tgl_masuk" required>
+                      <input type="text" class="form-control" id="datepicker" placeholder="Masukan Tanggal Masuk" name="tgl_masuk" required>
                       <i class="form-control-feedback"></i><span class="text-warning" ></span>
                   </div> 
 
@@ -63,8 +89,8 @@ $this->load->view('dist/_partials/header');
                   <div class="card-header">
                     <h4>Data Bahan Baku</h4>
                     <div class="float-right">
-                    <button class="btn btn-info " onclick="reload_table()" data-toggle="tooltip"  data-placement="top" title="Reload Table"><i class="glyphicon glyphicon-refresh"></i> Reload</button>
-                    <button type="button" class="btn btn-primary" onclick="add_kategori()" data-toggle="tooltip" data-placement="top" title="Tambah Data">
+                    <button class="btn btn-light float-right" onclick="reload_table()" data-toggle="tooltip"  data-placement="top" title="Reload Table"><i class="glyphicon glyphicon-refresh"></i> Reload</button>
+                    <button type="button" class="btn btn-success float-right" onclick="add_kategori()" data-toggle="tooltip" data-placement="top" title="Tambah Data">
                       Tambah
                     <span class="glyphicon glyphicon-file"></span></button>  
                   </div>
@@ -102,7 +128,7 @@ $this->load->view('dist/_partials/header');
 <script src="<?php echo base_url('assets/js/page/modules-datatables.js') ?>"></script> 
 
  <!-- General JS Scripts -->
-  <script src="<?php echo base_url(); ?>assets/modules/jquery.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/modules/popper.js"></script>
   <script src="<?php echo base_url(); ?>assets/modules/tooltip.js"></script>
   <script src="<?php echo base_url(); ?>assets/modules/bootstrap/js/bootstrap.min.js"></script>
