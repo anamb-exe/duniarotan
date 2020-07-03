@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M_user extends CI_Model{
+class M_dataorder extends CI_Model{
 
     function __construct() {
         parent::__construct();
@@ -9,14 +9,18 @@ class M_user extends CI_Model{
         $this->load->model('DbHelper');
     }
     function getSemua(){
-        $sql    =   "SELECT * from login";
-                    
-        return $this-> DbHelper->execQuery($sql);
+        $query = $this->db->get('order');
+        return $query; 
 
     }
 
+    function cek_meja($table,$where){
 
-function hapus_data($where,$table){
+        return $this->db->get_where($table,$where);
+    
+      }
+
+    function hapus_data($where,$table){
         $this->db->where($where);
         $this->db->delete($table);
     }
@@ -27,18 +31,18 @@ function hapus_data($where,$table){
 
     public function edit($id)
     {
-     $query = $this->db->query("SELECT * from login where login.id_login='$id'");
+     $query = $this->db->query("SELECT * from order where dataorder.id='$id'");
     return $query->row(); 
     }
 
      public function delete_by_kode($id)
     {
-        $this->db->where('id_login', $id);
-        $this->db->delete('login');
+        $this->db->where('id', $id);
+        $this->db->delete('order');
     }  
      public function update($where, $data)
     {
-        $this->db->update('login', $data, $where);
+        $this->db->update('order', $data, $where);
     }
  
 

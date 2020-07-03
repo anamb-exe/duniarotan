@@ -179,10 +179,10 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link"><i class="far fa-clipboard"></i><span>Data Bahan Baku</span></a>
+              <a href="<?php echo base_url('Bahanbaku'); ?>" class="nav-link"><i class="far fa-clipboard"></i><span>Data Bahan Baku</span></a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link"><i class="fas fa-shopping-cart"></i><span>Data Order</span></a>
+              <a href="<?php echo base_url('Dataorder'); ?>" class="nav-link"><i class="fas fa-shopping-cart"></i><span>Data Order</span></a>
             </li>
           </ul>
         </div>
