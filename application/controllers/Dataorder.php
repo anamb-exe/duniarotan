@@ -81,7 +81,7 @@ public function setView(){
     
        public function ajax_edit($id)
     {
-        $data = $this->M_dataorder->edit($id);
+        $data = $this->M_dataorder->edit($id)->result();
         echo json_encode($data);
     }
 

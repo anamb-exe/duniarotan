@@ -31,8 +31,8 @@ class M_dataorder extends CI_Model{
 
     public function edit($id)
     {
-     $query = $this->db->query("SELECT * from order where dataorder.id='$id'");
-    return $query->row(); 
+        $query = $this->db->query("SELECT * from order where order.id='$id'");
+        return $query->row();
     }
 
      public function delete_by_kode($id)
