@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Data Order</title>
+  <title>Data Monitoring</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/modules/bootstrap/css/bootstrap.min.css">
@@ -43,27 +43,41 @@ $this->load->view('dist/_partials/navbody');
             <form  id="form"  class="form-horizontal">
                 <div class="form-body"> 
                       <input type="hidden" class="form-control" name="id" >
+                   <div class="form-group">
+                      <label for="sel1">Pilih Nama Order:</label>
+                      <select class="form-control" name="kode" id="kendaraan">
+                          <?php
+                          foreach ($order as $value) {
+                              echo "<option value='$value->kode'>$value->nama</option>";
+                          }
+                          ?>
+                      </select>
+                  </div>    
                   <div class="form-group">
-                    <label>Kode</label>
-                      <input type="text" class="form-control" placeholder="Masukan Kode" name="kode" required>
+                    <label>Foto</label>
+                      <input type="file" class="form-control" name="photo" required>
                       <i class="form-control-feedback"></i><span class="text-warning" ></span>
                   </div>     
-                  <div class="form-group">
-                    <label>Nama</label>
-                      <input type="text" class="form-control" id="datepicker" placeholder="Masukan Nama" name="nama" required>
-                      <i class="form-control-feedback"></i><span class="text-warning" ></span>
-                  </div> 
-
-                  <div class="form-group">
-                    <label>Tanggal</label>
-                      <input type="text" class="form-control" placeholder="Masukan Tanggal" name="tanggal" required>
-                      <i class="form-control-feedback"></i><span class="text-warning" ></span>
-                  </div>   
                    <div class="form-group">
                     <label>Keterangan</label>
                       <input type="text" class="form-control" placeholder="Masukan Keterangan" name="keterangan" required>
                       <i class="form-control-feedback"></i><span class="text-warning" ></span>
-                  </div>   
+                  </div>  
+                  <div class="form-group">
+                    <label>Order</label>
+                      <input type="text" class="form-control" placeholder="Masukan Keterangan" name="order" required>
+                      <i class="form-control-feedback"></i><span class="text-warning" ></span>
+                  </div>  
+                  <!-- <div class="form-group">
+                    <label>Order</label>
+                      <select class="form-control" name="order" required>
+                        <option value="0">Kode Order</option>
+                        <?php for ($i=0; $i < count($order); $i++) { 
+                          echo '<option value="'.$order[$i]->kode.'">'.$order[$i]->nama.'</option>';
+                        } ?>
+                      </select>
+                      <i class="form-control-feedback"></i><span class="text-warning" ></span>
+                  </div>  -->    
                     
               </div>
             </form>
@@ -81,18 +95,18 @@ $this->load->view('dist/_partials/navbody');
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>Bahan Baku</h1>
+            <h1>Monitoring</h1>
             <div class="section-header-breadcrumb">
               <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
               <div class="breadcrumb-item"><a href="#">Master</a></div>
-              <div class="breadcrumb-item">Bahan Baku</div>
+              <div class="breadcrumb-item">Monitoring</div>
             </div>
           </div>
           <div class="row">
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Data Bahan Baku</h4>
+                    <h4>Data Monitoring</h4>
                     <div class="float-right">
                     <button class="btn btn-light float-right" onclick="reload_table()" data-toggle="tooltip"  data-placement="top" title="Reload Table"><i class="glyphicon glyphicon-refresh"></i> Reload</button>
                     <button type="button" class="btn btn-success float-right" onclick="add_kategori()" data-toggle="tooltip" data-placement="top" title="Tambah Data">
@@ -107,10 +121,10 @@ $this->load->view('dist/_partials/navbody');
                           <tr>
                               <th>No</th>
                               <th>Kode</th>
-                              <th>Nama</th>
+                              <th>Foto</th>
                               <th>Tanggal</th>
-                              <th>Jumlah</th>
                               <th>Keterangan</th>
+                              <th>Order</th>
                               <th>Action</th>
                           </tr>
                         </thead>
@@ -165,17 +179,17 @@ $this->load->view('dist/_partials/navbody');
           table = $('#table').DataTable({  
             "processing": true, 
             "ajax": {
-                "url": "<?php echo base_url('Dataorder/setView'); ?>",
+                "url": "<?php echo base_url('Monitoring/setView'); ?>",
                 "type": "POST",
             },
             "columns": [
 
               { "data": "no" },  
               { "data": "kode" },  
-              { "data": "nama" },
+              { "data": "foto" },
               { "data": "tanggal" },
-              { "data": "jumlah" },
               { "data": "keterangan" },
+              { "data": "order" },
               { "data": "action" }
             ],
             "order": [[0, 'asc']]
@@ -195,7 +209,7 @@ $this->load->view('dist/_partials/navbody');
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
     $('#modal_form').modal('show'); // show bootstrap modal
-    $('.modal-title').text('Input Dataorder'); // Set Title to Bootstrap modal title
+    $('.modal-title').text('Input Monitoring'); // Set Title to Bootstrap modal title
     }
     
     function edit_data(id)
@@ -206,7 +220,7 @@ $this->load->view('dist/_partials/navbody');
     $('.help-block').empty(); // clear error string
     //Ajax Load data from ajax
     $.ajax({
-        url : "<?php echo site_url('Dataorder/ajax_edit')?>/" + id,
+        url : "<?php echo site_url('Monitoring/ajax_edit')?>/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data)
@@ -216,8 +230,9 @@ $this->load->view('dist/_partials/navbody');
     $('[name="nama"]').val(data.nama);
     $('[name="tanggal"]').val(data.tanggal);
     $('[name="keterangan"]').val(data.keterangan);
+    $('[name="order"]').val(data.order);
     $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-    $('.modal-title').text('Edit Data Bahanbaku'); // Set title to Bootstrap modal title
+    $('.modal-title').text('Edit Data Monitoring'); // Set title to Bootstrap modal title
     
     },
     error: function (jqXHR, textStatus , errorThrown)
@@ -234,18 +249,20 @@ $this->load->view('dist/_partials/navbody');
     var url;
     
     if(save_method == 'add') {
-    url = "<?php echo base_url('Dataorder/ajax_add')?>";
+    url = "<?php echo base_url('Monitoring/ajax_add')?>";
     } else {
-    url = "<?php echo base_url('Dataorder/ajax_update')?>";
+    url = "<?php echo base_url('Monitoring/ajax_update')?>";
     }
-    // ajax adding data to database
+    var formData = new FormData($('#form')[0]);
     $.ajax({
-    url : url,
-    type: "POST",
-    data: $('#form').serialize(),
-    dataType: "JSON",
-    success: function(data)
-    {
+        url : url,
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        dataType: "JSON",
+        success: function(data)
+        {
     if(data.status) //if success close modal and reload ajax table
     {
     $('#modal_form').modal('hide');
@@ -265,6 +282,35 @@ $this->load->view('dist/_partials/navbody');
     }
     });
     }
+    // ajax adding data to database
+    // $.ajax({
+    // url : url,
+    // type: "POST",
+    // data: $('#form').serialize(),
+    // dataType: "JSON",
+    // success: function(data)
+    // {
+    //   console.clear();
+    //   console.log(data);
+    // if(data.status) //if success close modal and reload ajax table
+    // {
+    // $('#modal_form').modal('hide');
+    // reload_table();
+    // }
+    
+    // $('#btnSave').text('Save'); //change button text
+    // $('#btnSave').attr('disabled',false); //set button enable
+    
+    // },
+    // error: function (jqXHR, textStatus , errorThrown)
+    // {
+    // alert('Error adding / update data');
+    // $('#btnSave').text('save'); //change button text
+    // $('#btnSave').attr('disabled',false); //set button enable
+    
+    // }
+    // });
+    
 
     function delete_data(id)
     {
@@ -272,7 +318,7 @@ $this->load->view('dist/_partials/navbody');
     {
     // ajax delete data to database
     $.ajax({
-    url : "<?php echo base_url('Dataorder/ajax_delete')?>/" +id,
+    url : "<?php echo base_url('Monitoring/ajax_delete')?>/" +id,
     type: "POST",
     dataType: "JSON",
     success: function(data)

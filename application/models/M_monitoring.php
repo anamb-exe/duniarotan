@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M_dataorder extends CI_Model{
+class M_monitoring extends CI_Model{
 
     function __construct() {
         parent::__construct();
@@ -9,7 +9,7 @@ class M_dataorder extends CI_Model{
         $this->load->model('DbHelper');
     }
     function getSemua(){
-        $query = $this->db->get('order');
+        $query = $this->db->get('monitoring');
         return $query; 
 
     }
@@ -32,7 +32,7 @@ class M_dataorder extends CI_Model{
     public function edit($id)
     {
         $this->db->select('*');
-        $this->db->from('order');
+        $this->db->from('monitoring');
         $this->db->where('id',$id);
         $query = $this->db->get();
         return $query->row();
@@ -41,11 +41,11 @@ class M_dataorder extends CI_Model{
      public function delete_by_kode($id)
     {
         $this->db->where('id', $id);
-        $this->db->delete('order');
+        $this->db->delete('monitoring');
     }  
      public function update($where, $data)
     {
-        $this->db->update('order', $data, $where);
+        $this->db->update('monitoring', $data, $where);
     }
  
 

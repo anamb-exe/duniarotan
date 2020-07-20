@@ -184,6 +184,9 @@
             <li class="nav-item">
               <a href="<?php echo base_url('Dataorder'); ?>" class="nav-link"><i class="fas fa-shopping-cart"></i><span>Data Order</span></a>
             </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url('Monitoring'); ?>" class="nav-link"><i class="fas fa-shopping-cart"></i><span>Data Monitoring</span></a>
+            </li>
           </ul>
         </div>
       </nav>

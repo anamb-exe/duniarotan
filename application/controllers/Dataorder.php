@@ -32,13 +32,15 @@ public function setView(){
         $list   = array();
         $No     = 1;
         foreach ($result as $r) {
+            $Arr = explode(" ", $r->keterangan);
             $row    = array(
                         "no"             => $No,
                         "kode"      => $r->kode,
                         "nama"      => $r->nama,
                         "tanggal"      => $r->tanggal,
-                        "keterangan"      => $r->keterangan,
-                        "action"         => tombol($r->ID)
+                        "jumlah" => $Arr[0],
+                        "keterangan"      => ucwords($Arr[1]),
+                        "action"         => tombol($r->id)
             );
 
             $list[] = $row;
@@ -55,8 +57,10 @@ public function setView(){
     }
 
 
-
     function ajax_add(){
+
+        date_default_timezone_get('Asia/Jakarta');
+        $now = date('Y-m-d');
 
 
         $kode = $this->input->post('kode');
@@ -68,8 +72,8 @@ public function setView(){
             
             "kode"      => $kode,
             "nama"      => $nama,
-            "tanggal"       => $tanggal,
-            "keterangan"      => $r->keterangan,
+            "tanggal"      => $now,
+            "keterangan"      => $keterangan
             
             );
 
@@ -81,7 +85,7 @@ public function setView(){
     
        public function ajax_edit($id)
     {
-        $data = $this->M_dataorder->edit($id)->result();
+        $data = $this->M_dataorder->edit($id);
         echo json_encode($data);
     }
 
