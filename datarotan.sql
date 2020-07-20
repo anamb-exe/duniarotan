@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Jul 2020 pada 08.11
--- Versi server: 10.1.32-MariaDB
--- Versi PHP: 5.6.36
+-- Generation Time: Jul 20, 2020 at 12:32 PM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.4.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -25,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `bahanbaku`
+-- Table structure for table `bahanbaku`
 --
 
 CREATE TABLE `bahanbaku` (
@@ -36,16 +35,17 @@ CREATE TABLE `bahanbaku` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `bahanbaku`
+-- Dumping data for table `bahanbaku`
 --
 
 INSERT INTO `bahanbaku` (`id`, `kode`, `tgl_masuk`, `jumlah`) VALUES
-(1, '01', '2020-06-09', 9);
+(1, '01', '2020-06-09', 10),
+(2, '02', '2020-07-07', 10);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `login`
+-- Table structure for table `login`
 --
 
 CREATE TABLE `login` (
@@ -55,7 +55,7 @@ CREATE TABLE `login` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `login`
+-- Dumping data for table `login`
 --
 
 INSERT INTO `login` (`username`, `password`, `level`) VALUES
@@ -64,7 +64,7 @@ INSERT INTO `login` (`username`, `password`, `level`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `monitoring`
+-- Table structure for table `monitoring`
 --
 
 CREATE TABLE `monitoring` (
@@ -76,76 +76,89 @@ CREATE TABLE `monitoring` (
   `order` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `monitoring`
+--
+
+INSERT INTO `monitoring` (`id`, `kode`, `foto`, `tanggal`, `keterangan`, `order`) VALUES
+(18, 'B002', '1595239787954.jpg', '2020-07-20', 'Proses pembuatan pesanan', '03');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `order`
+-- Table structure for table `order`
 --
 
 CREATE TABLE `order` (
-  `ID` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `kode` varchar(50) NOT NULL,
   `nama` varchar(50) NOT NULL,
-  `tanggal` date NOT NULL,
+  `tanggal` date DEFAULT NULL,
   `keterangan` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `order`
+--
+
+INSERT INTO `order` (`id`, `kode`, `nama`, `tanggal`, `keterangan`) VALUES
+(2, '01', 'Anam', '2020-07-16', '20 kursi'),
+(3, '02', 'Bayu', '2020-07-07', '20 Meja'),
+(4, '03', 'Dando', '2020-07-09', '10 Kursi');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `bahanbaku`
+-- Indexes for table `bahanbaku`
 --
 ALTER TABLE `bahanbaku`
   ADD UNIQUE KEY `kode` (`kode`),
   ADD KEY `id` (`id`);
 
 --
--- Indeks untuk tabel `login`
+-- Indexes for table `login`
 --
 ALTER TABLE `login`
   ADD PRIMARY KEY (`username`);
 
 --
--- Indeks untuk tabel `monitoring`
+-- Indexes for table `monitoring`
 --
 ALTER TABLE `monitoring`
-  ADD UNIQUE KEY `kode` (`kode`),
-  ADD KEY `id` (`id`),
-  ADD KEY `order` (`order`);
+  ADD PRIMARY KEY (`kode`),
+  ADD UNIQUE KEY `order` (`order`),
+  ADD KEY `id` (`id`);
 
 --
--- Indeks untuk tabel `order`
+-- Indexes for table `order`
 --
 ALTER TABLE `order`
-  ADD PRIMARY KEY (`kode`);
+  ADD PRIMARY KEY (`kode`),
+  ADD UNIQUE KEY `ID` (`id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `bahanbaku`
+-- AUTO_INCREMENT for table `bahanbaku`
 --
 ALTER TABLE `bahanbaku`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `monitoring`
+-- AUTO_INCREMENT for table `monitoring`
 --
 ALTER TABLE `monitoring`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- AUTO_INCREMENT for table `order`
 --
-
---
--- Ketidakleluasaan untuk tabel `monitoring`
---
-ALTER TABLE `monitoring`
-  ADD CONSTRAINT `monitoring_ibfk_1` FOREIGN KEY (`order`) REFERENCES `order` (`kode`);
+ALTER TABLE `order`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

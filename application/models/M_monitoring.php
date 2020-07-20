@@ -9,7 +9,11 @@ class M_monitoring extends CI_Model{
         $this->load->model('DbHelper');
     }
     function getSemua(){
-        $query = $this->db->get('monitoring');
+        $this->db->select('monitoring.*');
+        $this->db->select('order.nama');
+        $this->db->from('monitoring');
+        $this->db->join('order', 'order.kode=monitoring.order','left');
+        $query = $this->db->get();
         return $query; 
 
     }

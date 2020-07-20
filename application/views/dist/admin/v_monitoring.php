@@ -43,9 +43,14 @@ $this->load->view('dist/_partials/navbody');
             <form  id="form"  class="form-horizontal">
                 <div class="form-body"> 
                       <input type="hidden" class="form-control" name="id" >
+                  <div class="form-group">
+                    <label>Kode Monitoring</label>
+                      <input type="text" class="form-control" placeholder="Masukan Kode" name="kode" required>
+                      <i class="form-control-feedback"></i><span class="text-warning" ></span>
+                  </div>  
                    <div class="form-group">
                       <label for="sel1">Pilih Nama Order:</label>
-                      <select class="form-control" name="kode" id="kendaraan">
+                      <select class="form-control" name="order" id="kendaraan">
                           <?php
                           foreach ($order as $value) {
                               echo "<option value='$value->kode'>$value->nama</option>";
@@ -63,22 +68,6 @@ $this->load->view('dist/_partials/navbody');
                       <input type="text" class="form-control" placeholder="Masukan Keterangan" name="keterangan" required>
                       <i class="form-control-feedback"></i><span class="text-warning" ></span>
                   </div>  
-                  <div class="form-group">
-                    <label>Order</label>
-                      <input type="text" class="form-control" placeholder="Masukan Keterangan" name="order" required>
-                      <i class="form-control-feedback"></i><span class="text-warning" ></span>
-                  </div>  
-                  <!-- <div class="form-group">
-                    <label>Order</label>
-                      <select class="form-control" name="order" required>
-                        <option value="0">Kode Order</option>
-                        <?php for ($i=0; $i < count($order); $i++) { 
-                          echo '<option value="'.$order[$i]->kode.'">'.$order[$i]->nama.'</option>';
-                        } ?>
-                      </select>
-                      <i class="form-control-feedback"></i><span class="text-warning" ></span>
-                  </div>  -->    
-                    
               </div>
             </form>
           </div>
@@ -120,11 +109,11 @@ $this->load->view('dist/_partials/navbody');
                         <thead>
                           <tr>
                               <th>No</th>
-                              <th>Kode</th>
+                              <th>Kode Monitoring</th>
+                              <th>Nama Order</th>
                               <th>Foto</th>
                               <th>Tanggal</th>
                               <th>Keterangan</th>
-                              <th>Order</th>
                               <th>Action</th>
                           </tr>
                         </thead>
@@ -139,6 +128,39 @@ $this->load->view('dist/_partials/navbody');
         </section>
       </div>
 
+      <div class="modal fade" id="modal_img">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Large Modal</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+          <div class="box-body pad">
+            <form id="img" class="needs-validation" role="form"><div class="form-row">
+                <div class="col-md-12 mb-3">
+                  <div class="form-group" id="photo-preview">
+                      <div class="col-md-12">
+                        (No photo)
+                        <span class="help-block"></span>
+                      </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+          <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          </form>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
   <!-- AdminLTE App -->
   
 <script src="<?php echo base_url('assets/modules/jquery.min.js') ?>"></script> 
@@ -186,10 +208,10 @@ $this->load->view('dist/_partials/navbody');
 
               { "data": "no" },  
               { "data": "kode" },  
+              { "data": "order" },
               { "data": "foto" },
               { "data": "tanggal" },
               { "data": "keterangan" },
-              { "data": "order" },
               { "data": "action" }
             ],
             "order": [[0, 'asc']]
@@ -334,6 +356,40 @@ $this->load->view('dist/_partials/navbody');
     });
     
     }
+    }
+
+    function img_data(id)
+    {
+    $('#img')[0].reset(); // reset form on modals
+    $('.form-group').removeClass('has-error'); // clear error class
+    $('.help-block').empty(); // clear error string
+    //Ajax Load data from ajax
+    $.ajax({
+    url : "<?php echo site_url('Monitoring/ajax_edit')?>/" + id,
+    type: "GET",
+    dataType: "JSON",
+    success: function(data)
+    {
+    $('#modal_img').modal('show'); // show bootstrap modal when complete loaded
+    $('.modal-title').text('Proses'); // Set title to Bootstrap modal title
+    
+    $('#photo-preview').show(); // show photo preview modal
+    if(data.foto != null)
+    {
+        $('#photo-preview div').html('<img src="<?php echo base_url();?>/assets/foto/'+data.foto+'" style="width:100%;">'); // show photo
+    }
+    else
+    {
+      
+    }
+
+    
+    },
+    error: function (jqXHR, textStatus , errorThrown)
+    {
+    alert('Error get data from ajax');
+    }
+    });
     }
 </script>
 

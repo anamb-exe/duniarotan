@@ -1,0 +1,13 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+ 
+function see($text)
+{
+    $text = ("<a href='javascript:void(0)' class='btn btn-sm btn-warning' data-toggle='tooltip' data-placement='top' title='Edit' onclick='edit_data(".$text.")'><i class='fas fa-edit'></i>Edit</a>
+    <a href='javascript:void(0)' class='btn btn-sm btn-danger' data-toggle='tooltip' data-placement='top' title='Hapus' onclick='delete_data(".$text.")'><i class='fas fa-trash-alt'></i>Delete</a>
+    <a href='javascript:void(0)' class='btn btn-sm btn-warning' data-toggle='tooltip' data-placement='top' title='Img' onclick='img_data(".$text.")'><i class='fas fa-images'></i>Lihat</a>
+    	");
+ 
+    return $text;
+}
+
+?>

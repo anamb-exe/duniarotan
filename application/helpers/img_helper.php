@@ -2,7 +2,7 @@
  
 function img($text)
 {
-    $text = '<img src="'.base_url().'/assets/imgmenu/'.$text.'" style="width:80px;">';
+    $text = '<img src="'.base_url().'/assets/foto/'.$text.'" style="width:80px;">';
     return $text;
 }
 
